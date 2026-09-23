@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff8ed" />
+    <meta name="description" content="Primera prueba técnica de Dulces de la Ruta." />
+    <title>Dulces de la Ruta · Prueba técnica</title>
+    <script type="module" crossorigin src="./assets/index-CUy9KuUy.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-VLmiwZjK.css">
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Prototipo · entrega E1</p>
+          <h1>Dulces de la Ruta</h1>
+        </div>
+        <button id="pause-button" class="secondary-button" type="button" aria-pressed="false">Pausar</button>
+      </header>
+
+      <main class="layout">
+        <section class="play-area" aria-label="Carretera y aleteo">
+          <div class="scene-frame">
+            <div id="game" aria-label="Palomita junto a la carretera; vehículos de prueba circulan"></div>
+            <span class="scene-caption">Escena técnica · tráfico de prueba</span>
+          </div>
+          <div class="attention-card">
+            <div class="meter-heading">
+              <span>Atención</span>
+              <strong id="attention-value">0 %</strong>
+            </div>
+            <div id="attention-meter" class="meter" role="progressbar" aria-label="Atención" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div id="attention-fill" class="meter-fill"></div>
+            </div>
+            <button id="wave-button" class="wave-button" type="button">Aletear</button>
+            <p class="hint">Prueba clic o toque. Cuatro pulsaciones a ritmo de dos por segundo llevan la atención al máximo.</p>
+          </div>
+        </section>
+
+        <aside class="info-area" aria-label="Información de esta entrega">
+          <div id="pause-status" class="status" role="status" hidden>En pausa. Pulsa Reanudar para continuar.</div>
+          <div class="info-card">
+            <h2>Primera entrega</h2>
+            <p>Ya puedes probar el aleteo, la respuesta visual, el escalado de la escena y la pausa. Al volver de otra pestaña, la prueba queda detenida hasta que pulses Reanudar.</p>
+            <p>Los vehículos de esta escena son una muestra visual. Paradas, ventas, stock, mejoras y editor se integrarán en la siguiente entrega.</p>
+          </div>
+          <div class="info-card">
+            <h2>Qué revisar</h2>
+            <ul>
+              <li>Un toque o clic produce un solo aleteo.</li>
+              <li>La palomita, los vehículos y el botón se ven bien en tu pantalla.</li>
+              <li>Pausar, cambiar de pestaña y reanudar no adelanta la escena.</li>
+            </ul>
+          </div>
+          <p class="session-note">Esta entrega no guarda progreso. Recargar reinicia la prueba.</p>
+        </aside>
+      </main>
+    </div>
+  </body>
+</html>
