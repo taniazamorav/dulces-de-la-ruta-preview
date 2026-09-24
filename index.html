@@ -4,56 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#fff8ed" />
-    <meta name="description" content="Primera prueba técnica de Dulces de la Ruta." />
-    <title>Dulces de la Ruta · Prueba técnica</title>
-    <script type="module" crossorigin src="./assets/index-CUy9KuUy.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-VLmiwZjK.css">
+    <meta name="description" content="Prototipo jugable de Dulces de la Ruta." />
+    <title>Dulces de la Ruta · Prototipo</title>
+    <script type="module" crossorigin src="./assets/index-CEdI6rRj.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DFIFybDT.css">
   </head>
   <body>
     <div id="app">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Prototipo · entrega E1</p>
+          <p class="eyebrow">Prototipo P0 · en desarrollo</p>
           <h1>Dulces de la Ruta</h1>
+          <span id="avatar-name" class="avatar-name">Palomita</span>
         </div>
-        <button id="pause-button" class="secondary-button" type="button" aria-pressed="false">Pausar</button>
+        <div class="top-actions">
+          <button id="edit-button" class="secondary-button" type="button" hidden>Personaje</button>
+          <button id="help-info-button" class="secondary-button" type="button" hidden>Ayuda</button>
+          <button id="pause-button" class="secondary-button" type="button" hidden>Pausar</button>
+        </div>
       </header>
+
+      <div id="pause-status" class="status" role="status" hidden>En pausa</div>
+      <div id="help-panel" class="info-card help-panel" hidden>
+        <strong>Cómo jugar</strong>
+        <p>Aletea para subir la atención; eso aumenta la posibilidad de que un vehículo pare, sin garantizarlo. Los pasajeros interesados compran automáticamente si hay alfajores. La familia ofrece 10 por $4.000 cada 60 s de juego y el refuerzo compra el máximo posible usando dinero disponible. La reserva de $4.000 está incluida en la caja y protege la siguiente entrega.</p>
+      </div>
+      <div id="goal-notice" class="goal-notice" role="status" hidden>¡Conseguiste las cinco mejoras! Puedes seguir jugando esta misma partida.</div>
 
       <main class="layout">
         <section class="play-area" aria-label="Carretera y aleteo">
           <div class="scene-frame">
-            <div id="game" aria-label="Palomita junto a la carretera; vehículos de prueba circulan"></div>
-            <span class="scene-caption">Escena técnica · tráfico de prueba</span>
+            <div id="game" aria-label="Palomita, canastos y vehículos en la carretera"></div>
+            <span class="scene-caption">Carretera de La Ligua</span>
           </div>
           <div class="attention-card">
-            <div class="meter-heading">
-              <span>Atención</span>
-              <strong id="attention-value">0 %</strong>
+            <div class="quick-stats">
+              <div><span>Alfajores</span><strong id="stock-value">10 / 20</strong></div>
+              <div><span>Mejoras</span><strong id="goal-progress">0 / 5</strong></div>
             </div>
-            <div id="attention-meter" class="meter" role="progressbar" aria-label="Atención" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="meter-heading"><span>Atención</span><strong id="attention-value">0 %</strong></div>
+            <div id="attention-meter" class="meter" role="progressbar" aria-label="Atención, no probabilidad de parada" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
               <div id="attention-fill" class="meter-fill"></div>
             </div>
-            <button id="wave-button" class="wave-button" type="button">Aletear</button>
-            <p class="hint">Prueba clic o toque. Cuatro pulsaciones a ritmo de dos por segundo llevan la atención al máximo.</p>
+            <button id="wave-button" class="wave-button" type="button" disabled>Aletear</button>
+            <p class="hint">Más atención aumenta la posibilidad de parada; incluso al máximo algunos siguen de largo.</p>
           </div>
+          <section class="results-card" aria-label="Resultados de los vehículos">
+            <h2>En la carretera</h2>
+            <ol id="result-list" class="result-list" aria-live="polite"><li>Al comenzar, los vehículos llegarán cada 6–10 segundos.</li></ol>
+          </section>
         </section>
 
-        <aside class="info-area" aria-label="Información de esta entrega">
-          <div id="pause-status" class="status" role="status" hidden>En pausa. Pulsa Reanudar para continuar.</div>
-          <div class="info-card">
-            <h2>Primera entrega</h2>
-            <p>Ya puedes probar el aleteo, la respuesta visual, el escalado de la escena y la pausa. Al volver de otra pestaña, la prueba queda detenida hasta que pulses Reanudar.</p>
-            <p>Los vehículos de esta escena son una muestra visual. Paradas, ventas, stock, mejoras y editor se integrarán en la siguiente entrega.</p>
+        <aside class="info-area" aria-label="Gestión del negocio">
+          <section id="editor-section" class="info-card editor-card" aria-label="Editor de personaje">
+            <h2 id="editor-title">Tu palomita</h2>
+            <p class="editor-intro">Personaliza si quieres. La apariencia no cambia las ventas.</p>
+            <div class="editor-fields">
+              <label>Nombre <input id="avatar-input" maxlength="80" autocomplete="off" value="Palomita" /></label>
+              <label>Piel <select id="skin-input"><option value="light">Claro</option><option value="mediumLight" selected>Medio claro</option><option value="mediumDark">Medio oscuro</option><option value="dark">Oscuro</option></select></label>
+              <label>Peinado <select id="hair-style-input"><option value="short" selected>Corto</option><option value="wavy">Ondulado</option><option value="tied">Recogido</option></select></label>
+              <label>Color de pelo <select id="hair-color-input"><option value="black">Negro</option><option value="brown" selected>Castaño</option><option value="gray">Canoso</option></select></label>
+              <label>Cabeza <select id="head-input"><option value="none" selected>Sin accesorio</option><option value="cap">Gorro con visera</option><option value="visor">Visera abierta</option></select></label>
+            </div>
+            <p id="avatar-preview-description" class="preview-description">La escena muestra tu combinación.</p>
+            <div id="intro" class="intro">
+              <h3>Antes de empezar</h3>
+              <ol>
+                <li>Aletea para llamar la atención. Cerca de dos toques por segundo alcanzan el máximo.</li>
+                <li>No todos paran; los buses lo hacen menos. Quienes paran pueden comprar automáticamente.</li>
+                <li>Cuida el stock. Las mejoras usan dinero disponible; la reserva paga la entrega familiar.</li>
+              </ol>
+              <p class="intro-save-note">Esta prueba no guarda progreso. Recargar reinicia la partida.</p>
+            </div>
+            <div class="editor-actions">
+              <button id="cancel-editor" class="secondary-button" type="button" hidden>Cancelar</button>
+              <button id="save-editor" class="primary-button" type="button">Comenzar</button>
+            </div>
+          </section>
+
+          <div id="business-content" hidden>
+            <section class="info-card money-card" aria-label="Dinero">
+              <h2>Negocio</h2>
+              <div class="money-grid">
+                <div><span>Caja total</span><strong id="cash-value">$4.000</strong></div>
+                <div><span>Reserva incluida</span><strong id="reserve-value">$4.000</strong></div>
+                <div><span>Disponible</span><strong id="spendable-value">$0</strong></div>
+              </div>
+            </section>
+
+            <section class="info-card" aria-label="Abastecimiento">
+              <h2>Abastecimiento</h2>
+              <p id="family-status" class="supply-status">Familia: 10 alfajores por $4.000 en 60 s.</p>
+              <button id="restock-button" class="secondary-button wide-button" type="button" disabled>Refuerzo: 0 alfajores · $0</button>
+              <p id="restock-reason" class="small-note">La reserva protege la entrega familiar.</p>
+            </section>
+
+            <section class="info-card" aria-label="Mejoras">
+              <div class="section-heading"><h2>Mejoras</h2><strong id="upgrade-count">0 / 5</strong></div>
+              <div id="upgrade-list"></div>
+              <button id="help-toggle" class="secondary-button wide-button" type="button" hidden>Ayuda activa</button>
+              <p id="bus-milestone" class="small-note">Primera parada de bus: pendiente (hito opcional).</p>
+            </section>
+            <p class="session-note">Esta prueba no guarda progreso. Recargar reinicia la sesión.</p>
           </div>
-          <div class="info-card">
-            <h2>Qué revisar</h2>
-            <ul>
-              <li>Un toque o clic produce un solo aleteo.</li>
-              <li>La palomita, los vehículos y el botón se ven bien en tu pantalla.</li>
-              <li>Pausar, cambiar de pestaña y reanudar no adelanta la escena.</li>
-            </ul>
-          </div>
-          <p class="session-note">Esta entrega no guarda progreso. Recargar reinicia la prueba.</p>
         </aside>
       </main>
     </div>
